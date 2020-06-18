@@ -22,6 +22,145 @@ body {
 	height: 100%;
 }
 
+p, label {
+	font-family: "Source Sans Pro", sans-serif, monospace;
+	font-size: 24px;
+	color: #0A4F70;
+}
+
+button, input[type="button"], input[type="submit"] {
+  color: #0A4F70;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #F7F6F6;
+  padding: 12px;
+  border-radius: 10px;
+  display: inline-block;
+  border: 2px solid #C6C4C4;
+  transition: 0.4s ease 0s;
+  cursor: pointer;
+}
+
+button:hover, input[type="button"]:hover, input[type="submit"]:hover {
+  background-color: #C6C4C4;
+}
+
+input {
+  margin: 12px;
+}
+
+input:invalid {
+  background-color: pink;
+}
+
+input[type=radio], input[type=checkbox] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 13.33333px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  transition: all 0.2s ease-out 0s;
+  background: #C6C4C4;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+  vertical-align: text-bottom;
+}
+
+
+input[type=radio], input[type=checkbox]:hover {
+  background: #C6C4C4;
+}
+
+
+input[type=radio], input[type=checkbox]:checked {
+  background: #F04C63;
+}
+
+
+input[type=radio], input[type=checkbox]:checked::before {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  content: "\2713";;
+  display: inline-block;
+  font-size: 26.66667px;
+  text-align: center;
+  line-height: 40px;
+}
+
+
+input[type=radio], input[type=checkbox]:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: #F04C63;
+  content: '';
+  display: block;
+  position: relative;
+  z-index: 100;
+}
+
+.title {
+	font-family: "Oxygen" sans-serif, monospace;
+	font-size: 32px;
+	color: #0A4F70;
+}
+
+.section {
+	width: 40%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 4%;
+	border-radius: 32px;
+ 	border: 2px #C6C4C4 solid;
+ 	text-align: center;
+ 	padding: 12px;
+ 	box-shadow: 2px 4px 4px #C6C4C4;
+}
+
+.tab {
+  display: none;
+}
+
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #F7F6F6;
+  border: 2px solid #C6C4C4;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #F04C63;
+}
+
+#StepButtons {
+  float: right;
+  margin-right: 10%;
+}
+
 #Header {
 	background-color: #F04C63;
 	height: 10%;
@@ -70,11 +209,44 @@ body {
 }
 
 #ContactDetails p {
-	font-size: 24px;
 	margin-bottom: 6px;
 }
 
 #FooterLogo {
 	height: 100%;
-	display: inline-block;
+	position: absolute;
+	bottom: 2px;
+	right: 16px;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@media only screen and (max-width: 1300px) {
+	#LocationTitle {
+		margin-left: 40%;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	#LocationTitle {
+		margin-left: 20%;
+	}
+}
+
+@media only screen and (max-width: 570px) {
+	#LocationTitle {
+		margin-left: auto;
+	}
+
+	#FooterLogo {
+		display: none;
+	}
 }

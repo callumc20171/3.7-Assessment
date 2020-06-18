@@ -12,6 +12,53 @@
 		<h2 id="LocationTitle">Dunedin</h2>
 	</div>
 
+	<div class="section" id="StepForm">
+		<div class="tab">
+			<h2 class="title">Pick up information:</h2><br>
+			<label>Pick up date:</label><input type="date" id="PickUpDateInput"><br>
+			<label>Days:</label>
+			<select id="RentalDays">
+				<option value=""></option>
+			</select><br>
+			<label>Return date:</label><input type="date" id="ReturnDateInput"><br>
+		</div>
+
+		<div class="tab">
+			<h2 class="title">Select Car:</h2><br>
+			<!--add car slideshow!-->
+			<h2 class="title" id="CarNameTitle"></h2>
+			<p id="CarInformation"></p>
+			<h2 class="title" id="CarPrice"></h2>
+		</div>
+
+		<div class="tab">
+			<h2 class="title">Available Extras:</h2><br>
+		</div>
+
+		<div class="tab">
+			<h2 class="title">Booking Summary:</h2><br>
+		</div>
+
+		<div class="tab">
+			<h2 class="title">Personal Details:</h2><br>
+		</div>
+
+		<div style="overflow:auto;">
+		  <div id="StepButtons">
+		    <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+		    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+		  </div>
+		</div>
+
+		<div style="text-align:center;margin-top:40px;">
+		  <span class="step"></span>
+		  <span class="step"></span>
+		  <span class="step"></span>
+		  <span class="step"></span>
+		  <span class="step"></span>
+		</div>
+	</div>
+
 
 
 	<footer>
@@ -27,4 +74,6 @@
 			<img src="../images/ColoredLogov2.png" id="FooterLogo">
 		</div>
 	</footer>
+
+	<script src="./site.js"></script>
 </body>
