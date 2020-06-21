@@ -1,3 +1,5 @@
+database = firebase.database() //Set up firebase
+
 //Step by step form JS
 
 var currentTab = 0; // Current tab is set to be the first tab (0)
@@ -40,6 +42,7 @@ function nextPrev(n) {
 }
 
 function validateForm() {
+	return true //Delete this
   // This function deals with validation of the form fields
   var x, y, i, valid = true;
   x = document.getElementsByClassName("tab");
@@ -77,3 +80,12 @@ function fixStepIndicator(n) {
 
 
 //End step by step form JS
+
+//Car select JS
+
+//todo: Car info added to database so pull from there to display information
+//Calculate cost
+
+function selectCar(car) {
+
+}

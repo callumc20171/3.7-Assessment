@@ -1,0 +1,43 @@
+{
+	"cars": {
+		"nissan tiida": {
+			"price": "18",
+			"desc": "Seats: 5 x Seatbelts<br>Body Style: 4 Door Sedan or 5 Door Hatch<br>Luggage: 1 Large, 2 Small<br>Engine Size: 1.3 - 2.0 Litre<br>Fuel Usage: +/- 7 L / 100km<br>Fuel Type: Petrol<br>Transmission: Automatic<br>"
+		},
+
+		"suzuki swift": {
+			"price": "18",
+			"desc": "Seats: 5 x Seatbelts<br>Body Style: 5 Door Hatch<br>Luggage: 1 Large, 1 Small<br>Engine Size: 1.2 - 1.4 Litre<br>Fuel Usage: +/- 6 L / 100km<br>Fuel Type: Petrol<br>Transmission: Automatic<br>"
+		},
+
+		"mazda 3": {
+			"price": "23",
+			"desc": "Seats: 5 x Seatbelts<br>Body Style: 5-Door Hatch or Wagon<br>Luggage: 2 Large, 1 Small<br>Engine Size: 1.6 - 2.0 Litre<br>Fuel Usage: +/- 6 L / 100km<br>Fuel Type: Petrol<br>Transmission: Automatic<br>"
+		},
+
+		"holden trax": {
+			"price": "41",
+			"desc": "Seats: 5 x Seatbelts<br>Body Style: Compact SUV<br>Luggage: 1 Large, 2 Small<br>Engine Size: 1.4 - 1.8 Litre<br>Fuel Usage: +/- 6.9 L / 100km<br>Fuel Type: Petrol<br>Transmission: Automatic<br>"
+		},
+
+		"holden captiva": {
+			"price": "52",
+			"desc": "Seats: 5 x Seatbelts<br>Body Style: 4 Door SUV<br>Luggage: 3 Large, 1 Small<br>Engine Size: 3 Litre<br>Fuel Usage: +/- 9.2 L / 100km<br>Fuel Type: Petrol<br>Transmission: Automatic"
+		},
+
+		"toyota estima": {
+			"price": "62",
+			"desc": "Seats: 8 x Seatbelts<br>Body Style: People Mover<br>Luggage: 3 Large, 2 Small<br>Engine Size: 2.4 Litre<br>Fuel Usage: +/- 9.51 L / 100km<br>Fuel Type: Petrol Unleaded 91<br>Transmission: Automatic"
+		},
+
+		"nissan leaf": {
+			"price": "89",
+			"desc": "Seats:10 x Seatbelts<br>Body Style:Minivan<br>Luggage:2 Large, 4 Small<br>Engine Size:2.0 Litre<br>Fuel Usage:+/- 10 L / 100km<br>Fuel Type: Petrol<br>Transmission: Automatic"
+		},
+
+		"ford mondeo": {
+			"price": "86",
+			"desc": "Seats: 5x seatbelts <br>Body Style: Sedan <br>Luggage: 2 Large or 3 Small<br>Engine Size:  2400cc - 3000cc<br>Fuel Usage:+/- 14 L / 100km<br>Fuel Type: Petrol<br>Transmission: Automatic"
+		}
+	}
+}
