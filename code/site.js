@@ -81,11 +81,100 @@ function fixStepIndicator(n) {
 
 //End step by step form JS
 
+
+function dateChecker() {
+  if (PickUpDateInput.value != "") {
+    let checkOutDate = addDays(new Date(PickUpDateInput.value), RentalDays.value);
+    ReturnDateInput.value = stringifyDate(checkOutDate);
+  }
+  
+}
+
+function addDays(date, days) {
+  var result = new Date(date);
+  result.setDate(result.getDate() + Number(days));
+  return result;
+}
+
+function stringifyDate(date) {
+
+  var day = ("0" + date.getDate()).slice(-2);
+  var month = ("0" + (date.getMonth() + 1)).slice(-2);
+
+  var stringDate = date.getFullYear()+"-"+(month)+"-"+(day);
+  return stringDate;
+}
+
+PickUpDateInput.min = stringifyDate(new Date());
+PickUpDateInput.addEventListener("change", dateChecker);
+ReturnDateInput.min = stringifyDate(new Date());
+ReturnDateInput.addEventListener("change", dateChecker);
+RentalDays.addEventListener("change", dateChecker);
+
+//Booking information updater
+
+function calculateExtrasCost(extras) {
+  var price = 0;
+  for (let extra of extras) {
+  		price += Number(extra.dataset.price);
+  }
+  return price;
+}
+
+function calculateCost(carPrice, days) {
+	let bookingFee = 50;
+	let insuranceFee = 20;
+	return Number(Number(carPrice) * days) + bookingFee + insuranceFee;
+}
+
+function updateBooking() {
+	var selectedCar = document.querySelector(".car[selected]").dataset;
+	var extras = document.querySelectorAll(".extrasCheckbox:checked");
+	if (extras !== null) {
+		var extrasPrice = calculateExtrasCost(
+			document.querySelectorAll("extrasCheckbox:selected"));
+		//todo add innerHTML code
+	} else {
+		Extras.innerHTML = "No extras"
+	}
+	var pickUpDate = PickUpDateInput.value;
+	var rentalDays = RentalDays.value;
+	var returnDate = ReturnDateInput.value;
+	var cost = calculateCost();
+
+	PickUpLabel.innerHTML = "Pick up date: " + pickUpDate;
+	ReturnLabel.innerHTML = "Return date: " + returnDate;
+	SelectedCar.innerHTML = "Car: " + selectCar.car;
+}
+
+	
 //Car select JS
 
-//todo: Car info added to database so pull from there to display information
-//Calculate cost
+//todo add loading animation
+//todo add car slideshow
 
-function selectCar(car) {
+function selectCar(car, card) {
+	CarLoader.style.display = "grid";
+	CarDetailsDiv.style.display = "none";
+	database.ref("cars/"+car).once("value", function(snapshot) {
+		CarInformation.innerHTML = snapshot.val().desc
+		CarPrice.innerHTML = snapshot.val().price + "$/day<br>(" + Number(
+			snapshot.val().price) * Number(RentalDays.value) + "$ total)";
+		CarDetailsDiv.style.display = "grid";
+		CarLoader.style.display = "none";
+	});
+	let selectedCars = document.querySelectorAll(".car[selected]");
+	if (selectedCars < 1){
+
+	} else {
+		for (let c of selectedCars) {
+			c.removeAttribute("selected");
+		}
+	}
+	
+	card.setAttribute("selected", "true");
 
 }
+
+selectCar("toyota estima",
+ document.getElementsByClassName("car")[0])
