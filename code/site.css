@@ -80,6 +80,9 @@ input[type=radio], input[type=checkbox] {
   vertical-align: text-bottom;
 }
 
+select {
+	font-size: 18px;
+}
 
 input[type=radio], input[type=checkbox]:hover {
   background: #C6C4C4;
@@ -313,6 +316,10 @@ input[type=radio], input[type=checkbox]:checked::after {
 
 #ContactDetails p {
 	margin-bottom: 6px;
+}
+
+#StepButtons {
+	padding-top: 12px;
 }
 
 #FooterLogo {

@@ -1,3 +1,10 @@
+//Flags
+
+const DAYS_ADD = 0;
+const DAYS_SUBTRACT = 1;
+const CHECK_PICKUP = 0;
+const CHECK_RETURN = 1;
+
 database = firebase.database() //Set up firebase
 
 //Step by step form JS
@@ -25,6 +32,7 @@ function showTab(n) {
 }
 
 function nextPrev(n) {
+	updateBooking();
   // This function will figure out which tab to display
   var x = document.getElementsByClassName("tab");
   // Exit the function if any field in the current tab is invalid:
@@ -42,7 +50,6 @@ function nextPrev(n) {
 }
 
 function validateForm() {
-	return true //Delete this
   // This function deals with validation of the form fields
   var x, y, i, valid = true;
   x = document.getElementsByClassName("tab");
@@ -82,17 +89,39 @@ function fixStepIndicator(n) {
 //End step by step form JS
 
 
-function dateChecker() {
-  if (PickUpDateInput.value != "") {
-    let checkOutDate = addDays(new Date(PickUpDateInput.value), RentalDays.value);
-    ReturnDateInput.value = stringifyDate(checkOutDate);
-  }
+function dateChecker(flag) {
+	if (flag == CHECK_PICKUP) {
+		if (PickUpDateInput.value != "") {
+		  let checkOutDate = calcDays(new Date(PickUpDateInput.value),
+		   RentalDays.value, DAYS_ADD);
+		  ReturnDateInput.value = stringifyDate(checkOutDate);
+		  return true;
+		} return false;
+	}
+	if (flag == CHECK_RETURN) {
+		if (ReturnDateInput.value != "") {
+			let checkInDate = calcDays(new Date(ReturnDateInput.value),
+			 RentalDays.value, DAYS_SUBTRACT);
+			console.log(checkInDate);
+			PickUpDateInput.value = stringifyDate(checkInDate);
+			return true;
+		} return false;
+	} else {
+		console.log("Unknown flag in dateChecker: " + flag);
+		return false;
+	}
   
 }
 
-function addDays(date, days) {
+function calcDays(date, days, flag) {
   var result = new Date(date);
-  result.setDate(result.getDate() + Number(days));
+  if (flag == DAYS_ADD) {  	
+  	result.setDate(result.getDate() + Number(days));
+  } else if (flag == DAYS_SUBTRACT) {
+  	result.setDate(result.getDate() - Number(days));
+  } else {
+  	console.log("Unknown flag in calcDays: " + flag);
+  }
   return result;
 }
 
@@ -106,10 +135,16 @@ function stringifyDate(date) {
 }
 
 PickUpDateInput.min = stringifyDate(new Date());
-PickUpDateInput.addEventListener("change", dateChecker);
+PickUpDateInput.addEventListener("change", function() {
+	dateChecker(CHECK_PICKUP)
+});
 ReturnDateInput.min = stringifyDate(new Date());
-ReturnDateInput.addEventListener("change", dateChecker);
-RentalDays.addEventListener("change", dateChecker);
+ReturnDateInput.addEventListener("change", function() {
+	dateChecker(CHECK_RETURN);
+});
+RentalDays.addEventListener("change", function() {
+	dateChecker(CHECK_PICKUP);
+});
 
 //Booking information updater
 
@@ -130,21 +165,27 @@ function calculateCost(carPrice, days) {
 function updateBooking() {
 	var selectedCar = document.querySelector(".car[selected]").dataset;
 	var extras = document.querySelectorAll(".extrasCheckbox:checked");
+	Extras.innerHTML = "Extras: "
+	var extrasArray = [];
 	if (extras !== null) {
-		var extrasPrice = calculateExtrasCost(
-			document.querySelectorAll("extrasCheckbox:selected"));
-		//todo add innerHTML code
+		var extrasPrice = calculateExtrasCost(extras);
+		for (let e of extras) {
+			extrasArray.push(e.value);
+		}
+		Extras.innerHTML += extrasArray.join(", ");
 	} else {
-		Extras.innerHTML = "No extras"
+		Extras.innerHTML += "No extras"
 	}
 	var pickUpDate = PickUpDateInput.value;
 	var rentalDays = RentalDays.value;
 	var returnDate = ReturnDateInput.value;
-	var cost = calculateCost();
+	var cost = calculateCost(selectedCar.price, rentalDays);
+	var extraComments = ExtraDetail.value;
 
 	PickUpLabel.innerHTML = "Pick up date: " + pickUpDate;
 	ReturnLabel.innerHTML = "Return date: " + returnDate;
-	SelectedCar.innerHTML = "Car: " + selectCar.car;
+	SelectedCar.innerHTML = "Car: " + selectedCar.car;
+	Price.innerHTML = "Final price: " + cost + "$";
 }
 
 	
@@ -178,3 +219,4 @@ function selectCar(car, card) {
 
 selectCar("toyota estima",
  document.getElementsByClassName("car")[0])
+
