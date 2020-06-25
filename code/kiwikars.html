@@ -7,13 +7,23 @@
 	<title>Kiwi Kars</title>
 </head>
 <body>
+	<div id="ConfirmOverlay">
+		<h1 class="title" id="TicketNo">Your ticket: </h1>
+		<p>
+			Your booking has been submitted.<br>
+			A confirmation email will be sent once your booking has been confirmed.
+		</p>
+		<a href="javascript:void(0);" onclick="location.reload()" id="ReloadButton">&times</a>
+	</div>
 	<div id="PageContainer">
 		<div id="ContentWrap">
 			<div id="Header">
 				<img src="../images/ColoredLogo.png" id="HeaderLogo">
 				<h2 id="LocationTitle">Dunedin</h2>
 			</div>
-
+			<!--div class="section" id="ErrorDiv">
+				
+			</div-->
 			<div class="section" id="StepForm">
 				<div class="tab">
 					<h2 class="title">Pick up information:</h2><br>
@@ -134,6 +144,12 @@
 
 				<div class="tab">
 					<h2 class="title">Personal Details:</h2><br>
+					<label>Full Name: <input type="text" class="detailInput" id="NameInput" placeholder="Your name" pattern="^(\w\w+)\s(\w+)$" autocomplete="name"></label><br>
+					<label>Email: <input type="email" class="detailInput" id="EmailInput" placeholder="your@email.com" autocomplete="email"></label><br>
+					<label>Phone: <input type="text" class="detailInput" id="CellInput" placeholder="028436473" pattern="02[0-9]\d{6,8}" autocomplete="on" name="cellphone"></label><br>
+					<label>License number: <input type="text" class="detailInput" id="DLNumber" placeholder="NZ123456" pattern="[A-Z]{2}[0-9]{6}" autocomplete="on" name="license number"></label><br>
+					<label>Age: <input type="number" class="detailInput" id="AgeInput" placeholder="25" min="25" autocomplete="on" name="age"></label><br>
+					<label><b id="TermsLabel">By ticking this checkbox you agree to the Kiwi Kars Terms & Conditions</b><input type="checkbox" id="TermsCheckbox" required></label>
 				</div>
 
 				<div style="overflow:auto;">

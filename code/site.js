@@ -43,6 +43,7 @@ function nextPrev(n) {
   currentTab = currentTab + n;
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
+  	generateTicket(Math.round(Math.random() * 10000000));
     //...the form gets submitted:
   }
   // Otherwise, display the correct tab:
@@ -102,7 +103,6 @@ function dateChecker(flag) {
 		if (ReturnDateInput.value != "") {
 			let checkInDate = calcDays(new Date(ReturnDateInput.value),
 			 RentalDays.value, DAYS_SUBTRACT);
-			console.log(checkInDate);
 			PickUpDateInput.value = stringifyDate(checkInDate);
 			return true;
 		} return false;
@@ -167,7 +167,7 @@ function updateBooking() {
 	var extras = document.querySelectorAll(".extrasCheckbox:checked");
 	Extras.innerHTML = "Extras: "
 	var extrasArray = [];
-	if (extras !== null) {
+	if (extras.length != 0) {
 		var extrasPrice = calculateExtrasCost(extras);
 		for (let e of extras) {
 			extrasArray.push(e.value);
@@ -176,6 +176,8 @@ function updateBooking() {
 	} else {
 		Extras.innerHTML += "No extras"
 	}
+
+	//Values to be shown in booking summary
 	var pickUpDate = PickUpDateInput.value;
 	var rentalDays = RentalDays.value;
 	var returnDate = ReturnDateInput.value;
@@ -186,12 +188,50 @@ function updateBooking() {
 	ReturnLabel.innerHTML = "Return date: " + returnDate;
 	SelectedCar.innerHTML = "Car: " + selectedCar.car;
 	Price.innerHTML = "Final price: " + cost + "$";
+
+	return {
+		"PickUp" : pickUpDate,
+		"Return" : returnDate,
+		"RentedDays" : rentalDays,
+		"cost" : cost,
+		"extras" : extrasArray,
+		"comments" : extraComments
+	}
+
+}
+
+function pushToFirebase(ticket) {
+    var bookingInfo = updateBooking();
+
+	//Personal info details
+	bookingInfo.name = NameInput.value;
+	bookingInfo.email = EmailInput.value;
+	bookingInfo.phone = CellInput.value;
+	bookingInfo.licenseNumber = DLNumber.value;
+	bookingInfo.age = AgeInput.value;
+
+
+    database.ref("bookings/" + ticket).set(bookingInfo);
+    TicketNo.innerHTML += ticket;
+    PageContainer.style.display = "none";
+
+    ConfirmOverlay.style.display = "block";
+}
+
+function generateTicket(ticket) {
+	let ticketRef = database.ref("Bookings/" + ticket);
+	ticketRef.once('value', function(snapshot) { //Recursively generate unused ticket
+	if (!snapshot.exists()) {
+	  pushToFirebase(ticket);
+	} else {
+	  generateTicket(Math.round(Math.random() * 10000000));
+	}
+	});
 }
 
 	
 //Car select JS
 
-//todo add loading animation
 //todo add car slideshow
 
 function selectCar(car, card) {

@@ -201,6 +201,31 @@ input[type=radio], input[type=checkbox]:checked::after {
   background-color: #F04C63;
 }
 
+#ConfirmOverlay {
+	background-color: #F04C63;
+	width: 100vw;
+	height: 100vh;
+	text-align: center;
+	display: none; 
+}
+
+#TicketNo {
+	padding-top: 32px;
+}
+
+#ReloadButton {
+  position: fixed;
+  font-size: 64px;
+  top: 2%;
+  right: 3%;
+  text-decoration: none;
+  color: #0A4F70;
+}
+
+#ReloadButton:hover {
+	color: #F7F6F6;
+}
+
 #PageContainer {
 	position: relative;
 	min-height: 100vh;
@@ -233,6 +258,11 @@ input[type=radio], input[type=checkbox]:checked::after {
 	margin-bottom: 0px;
 	display: inline-block;
 	vertical-align: baseline;
+}
+
+#SubmitLoader {
+	margin: auto;
+	display: none;
 }
 
 #StepForm {
@@ -290,6 +320,10 @@ input[type=radio], input[type=checkbox]:checked::after {
   margin: 12px;
   vertical-align: middle;
   resize: none;
+}
+
+#TermsLabel {
+	font-size: 12px;
 }
 
 #Footer {
