@@ -165,7 +165,7 @@ input[type=radio], input[type=checkbox]:checked::after {
   transition: 0.3s;
 }
 
-.car[selected] {
+.car[selected], .extrasCard[selected] {
 	border: 2px solid #0A4F70;
 }
 
@@ -175,6 +175,11 @@ input[type=radio], input[type=checkbox]:checked::after {
 
 .container {
   padding: 2px 16px;
+}
+
+.extrasCard {
+	width: 42.5%;
+	margin: 16px auto 16px auto;
 }
 
 .tab {
@@ -265,6 +270,12 @@ input[type=radio], input[type=checkbox]:checked::after {
 	display: none;
 }
 
+#ErrorDiv {
+	display: none;
+	margin-top: 12px;
+	background-color: #F04C63;
+}
+
 #StepForm {
 	padding: 32px;
 	margin-bottom: 16px;
@@ -314,6 +325,11 @@ input[type=radio], input[type=checkbox]:checked::after {
 
 }
 
+#ExtrasCards {
+	display: flex;
+	flex-wrap: wrap;
+}
+
 #ExtraDetail {
   width: 35%;
   height: 90px;
@@ -352,6 +368,18 @@ input[type=radio], input[type=checkbox]:checked::after {
 	margin-bottom: 6px;
 }
 
+#TermsDiv {
+	display: flex;
+	width: 50%;
+	margin: auto;
+	padding: 24px;
+}
+
+#TermsLabel {
+	display: inline-block;
+	width: 75%;
+}
+
 #StepButtons {
 	padding-top: 12px;
 }
@@ -387,6 +415,10 @@ input[type=radio], input[type=checkbox]:checked::after {
 @media only screen and (max-width: 800px) {
 	#LocationTitle {
 		margin-left: 20%;
+	}
+
+	#StepButtons {
+		float: none;
 	}
 }
 

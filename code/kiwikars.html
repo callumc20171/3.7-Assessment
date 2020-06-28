@@ -21,9 +21,9 @@
 				<img src="../images/ColoredLogo.png" id="HeaderLogo">
 				<h2 id="LocationTitle">Dunedin</h2>
 			</div>
-			<!--div class="section" id="ErrorDiv">
-				
-			</div-->
+			<div class="section" id="ErrorDiv">
+				<h1 class="title">Please fill in the form correctly</h1>
+			</div>
 			<div class="section" id="StepForm">
 				<div class="tab">
 					<h2 class="title">Pick up information:</h2><br>
@@ -123,11 +123,53 @@
 
 				<div class="tab">
 					<h2 class="title">Available Extras:</h2><br>
-					<label><input type="checkbox" class="extrasCheckbox" value="Snow Chains" data-price="60" for="extras">$60 - Snow Chains</label><br>
+					<!--label><input type="checkbox" class="extrasCheckbox" value="Snow Chains" data-price="60" for="extras">$60 - Snow Chains</label><br>
 					<label><input type="checkbox" class="extrasCheckbox" value="Roof Racks" data-price="90" for="extras">$90 - Roof Racks</label><br>
 					<label><input type="checkbox" class="extrasCheckbox" value="Bike Rack" data-price="120" for="extras">$120 - Bike Rack(Fits 3 bikes)</label><br>
 					<label><input type="checkbox" class="extrasCheckbox" value="GPS" data-price="30" for="extras">$30 - GPS</label><br><br>
-					<label><input type="checkbox" class="extrasCheckbox" value="Child Booster Seat" data-price="50" for="extras">$50 - Child Booster Seat</label><br><br>
+					<label><input type="checkbox" class="extrasCheckbox" value="Child Booster Seat" data-price="50" for="extras">$50 - Child Booster Seat</label><br><br-->
+					<div id="ExtrasCards">
+						<div class="extrasCard card" onclick="selectExtra(this);" data-name="Snow Chains" data-price="60">
+							<div class="container">
+								<h1 class="title">Snow Chains</h1>
+								<p>
+									Snow Chains are available for 60$
+								</p>
+							</div>
+						</div>
+						<div class="extrasCard card" onclick="selectExtra(this);" data-name="Roof Racks" data-price="90">
+							<div class="container">
+								<h1 class="title">Roof Racks</h1>
+								<p>
+									Roof Racks are available for 90$
+								</p>
+							</div>
+						</div>
+						<div class="extrasCard card" onclick="selectExtra(this);" data-name="Bike Rack" data-price="120">
+							<div class="container">
+								<h1 class="title">Bike Rack</h1>
+								<p>
+									Bike Racks fit a maximum of 3 bikes and  are available for 120$
+								</p>
+							</div>
+						</div>
+						<div class="extrasCard card" onclick="selectExtra(this);" data-name="Child Booster Seat" data-price="50" >
+							<div class="container">
+								<h1 class="title">Booster Seat</h1>
+								<p>
+									The booster seat fits children 9kg-36kg and is available for 50$
+								</p>
+							</div>
+						</div>
+						<div class="extrasCard card" onclick="selectExtra(this);" data-name="GPS" data-price="35">
+							<div class="container">
+								<h1 class="title">GPS</h1>
+								<p>
+									A GPS is available for 35$
+								</p>
+							</div>
+						</div>
+					</div>
 					<label>Extra information:<textarea id="ExtraDetail"></textarea></label>
 				</div>
 
@@ -149,7 +191,9 @@
 					<label>Phone: <input type="text" class="detailInput" id="CellInput" placeholder="028436473" pattern="02[0-9]\d{6,8}" autocomplete="on" name="cellphone"></label><br>
 					<label>License number: <input type="text" class="detailInput" id="DLNumber" placeholder="NZ123456" pattern="[A-Z]{2}[0-9]{6}" autocomplete="on" name="license number"></label><br>
 					<label>Age: <input type="number" class="detailInput" id="AgeInput" placeholder="25" min="25" autocomplete="on" name="age"></label><br>
-					<label><b id="TermsLabel">By ticking this checkbox you agree to the Kiwi Kars Terms & Conditions</b><input type="checkbox" id="TermsCheckbox" required></label>
+					<div id="TermsDiv">
+						<label><b id="TermsLabel">By ticking this checkbox you agree to the Kiwi Kars Terms & Conditions</b><input type="checkbox" id="TermsCheckbox" required></label>
+					</div>
 				</div>
 
 				<div style="overflow:auto;">
