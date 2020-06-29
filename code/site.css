@@ -178,8 +178,8 @@ input[type=radio], input[type=checkbox]:checked::after {
 }
 
 .extrasCard {
-	width: 42.5%;
-	margin: 16px auto 16px auto;
+	width: 90%;
+	margin: 8px auto 8px auto;
 }
 
 .tab {
