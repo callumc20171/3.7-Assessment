@@ -28,6 +28,15 @@ p, label {
 	color: #0A4F70;
 }
 
+input {
+  margin: 12px;
+  border-radius: 5px;
+}
+
+input:invalid {
+  background-color: pink;
+}
+
 button, input[type="button"], input[type="submit"] {
   color: #0A4F70;
   text-transform: uppercase;
@@ -43,14 +52,6 @@ button, input[type="button"], input[type="submit"] {
 
 button:hover, input[type="button"]:hover, input[type="submit"]:hover {
   background-color: #C6C4C4;
-}
-
-input {
-  margin: 12px;
-}
-
-input:invalid {
-  background-color: pink;
 }
 
 input[type=radio], input[type=checkbox] {
@@ -206,6 +207,11 @@ input[type=radio], input[type=checkbox]:checked::after {
   background-color: #F04C63;
 }
 
+.detailInput {
+	padding: 12px;
+	font-size: 14px;
+}
+
 #ConfirmOverlay {
 	background-color: #F04C63;
 	width: 100vw;
@@ -342,6 +348,111 @@ input[type=radio], input[type=checkbox]:checked::after {
 	font-size: 12px;
 }
 
+#DetailsGrid {
+	display: grid;
+	width: 80%;
+	height: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	grid-template-columns: [labels] 1fr [inputs] 1fr;
+	grid-template-rows: [name] 1fr [email] 1fr [phone]
+	 1fr [license] 1fr [age] 1fr [checkbox] 1fr;
+}
+
+#DetailsGrid label {
+	margin: auto;
+}
+
+#NameLabel {
+	grid-column-start: labels;
+	grid-column-end: labels;
+	grid-row-start: name;
+	grid-row-end: name;
+}
+
+#EmailLabel {
+	grid-column-start: labels;
+	grid-column-end: labels;
+	grid-row-start: email;
+	grid-row-end: email;
+}
+
+#PhoneLabel {
+	grid-column-start: labels;
+	grid-column-end: labels;
+	grid-row-start: phone;
+	grid-row-end: phone;
+}
+
+#LicenseLabel {
+	grid-column-start: labels;
+	grid-column-end: labels;
+	grid-row-start: license;
+	grid-row-end: license;
+}
+
+#AgeLabel {
+	grid-column-start: labels;
+	grid-column-end: labels;
+	grid-row-start: age;
+	grid-row-end: age;
+}
+
+#NameInput {
+	grid-column-start: inputs;
+	grid-column-end: inputs;
+	grid-row-start: name;
+	grid-row-end: name;
+}
+
+#EmailInput {
+	grid-column-start: inputs;
+	grid-column-end: inputs;
+	grid-row-start: email;
+	grid-row-end: email;
+}
+
+#CellInput {
+	grid-column-start: inputs;
+	grid-column-end: inputs;
+	grid-row-start: phone;
+	grid-row-end: phone;
+}
+
+#DLNumber {
+	grid-column-start: inputs;
+	grid-column-end: inputs;
+	grid-row-start: license;
+	grid-row-end: license;
+}
+
+#AgeInput {
+	grid-column-start: inputs;
+	grid-column-end: inputs;
+	grid-row-start: age;
+	grid-row-end: age;
+}
+
+#TermsLabel {
+	margin: auto;
+	padding: 24px;
+	grid-column-start: labels;
+	grid-column-end: labels;
+	grid-row-start: checkbox;
+	grid-row-end: checkbox;
+}
+
+#TermsCheckbox {
+	grid-column-start: inputs;
+	grid-column-end: inputs;
+	grid-row-start: checkbox;
+	grid-row-end: checkbox;
+}
+
+#StepButtons {
+	padding-top: 12px;
+}
+
 #Footer {
 	position: absolute;
 	width: 100%;
@@ -366,22 +477,6 @@ input[type=radio], input[type=checkbox]:checked::after {
 
 #ContactDetails p {
 	margin-bottom: 6px;
-}
-
-#TermsDiv {
-	display: flex;
-	width: 50%;
-	margin: auto;
-	padding: 24px;
-}
-
-#TermsLabel {
-	display: inline-block;
-	width: 75%;
-}
-
-#StepButtons {
-	padding-top: 12px;
 }
 
 #FooterLogo {
