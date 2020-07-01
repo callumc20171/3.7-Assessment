@@ -31,6 +31,7 @@ p, label {
 input {
   margin: 12px;
   border-radius: 5px;
+  border-color: #C6C4C4;
 }
 
 input:invalid {
@@ -145,6 +146,87 @@ input[type=radio], input[type=checkbox]:checked::after {
  	box-shadow: 2px 4px 4px #C6C4C4;
 }
 
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+.carSlide {
+  display: none;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  background-color: rgba(0,0,0,0.3);
+  color: #0A4F70;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev {
+	margin-left: -50%;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.text {
+  color: #0A4F70;
+  font-size: 24px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: -16px;
+  width: 100%;
+  text-align: center;
+}
+
+.numbertext {
+  color: #0A4F70;
+  font-size: 32px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #F7F6F6;
+  border: 2px solid #C6C4C4; 
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #F04C63;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
 .break {
   flex-basis: 100%;
   height: 0;
@@ -153,6 +235,11 @@ input[type=radio], input[type=checkbox]:checked::after {
 .carImage {
 	width: 100%;
 	height: 40%;
+}
+
+.carSlideImage {
+	width: 100%;
+	height: 400px;
 }
 
 .car {
@@ -292,7 +379,17 @@ input[type=radio], input[type=checkbox]:checked::after {
   margin-right: 10%;
 }
 
+#CarSelectDiv {
+	display: grid;
+}
+
+#CarSlideshow {
+	display: none;
+	grid-area: 1/1;
+}
+
 #CarCards {
+	grid-area: 1/1;
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -328,7 +425,6 @@ input[type=radio], input[type=checkbox]:checked::after {
 	grid-column-end: price; 
 	grid-row-start: second;
 	grid-row-end: second;
-
 }
 
 #ExtrasCards {
@@ -435,7 +531,6 @@ input[type=radio], input[type=checkbox]:checked::after {
 
 #TermsLabel {
 	margin: auto;
-	padding: 24px;
 	grid-column-start: labels;
 	grid-column-end: labels;
 	grid-row-start: checkbox;
@@ -447,6 +542,8 @@ input[type=radio], input[type=checkbox]:checked::after {
 	grid-column-end: inputs;
 	grid-row-start: checkbox;
 	grid-row-end: checkbox;
+	padding: 0px;
+	margin: auto auto 16px 0px;
 }
 
 #StepButtons {
@@ -507,7 +604,20 @@ input[type=radio], input[type=checkbox]:checked::after {
 	}
 }
 
+@media only screen and (max-width: 1024px) {
+	label, p {
+		font-size: 18px;
+	}
+
+	.title {
+		font-size: 26px;
+	}
+}
+
 @media only screen and (max-width: 800px) {
+	.car {
+		width: 45%;
+	}
 	#LocationTitle {
 		margin-left: 20%;
 	}
@@ -518,6 +628,18 @@ input[type=radio], input[type=checkbox]:checked::after {
 }
 
 @media only screen and (max-width: 570px) {
+	#CarChangeButton {
+		display: none;
+	}
+
+	#CarSlideshow {
+		display: block;
+	}
+
+	#CarCards {
+		display: none;
+	}
+
 	#LocationTitle {
 		margin-left: auto;
 	}

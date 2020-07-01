@@ -93,6 +93,37 @@ function fixStepIndicator(n) {
 	x[n].className += " active";
 }
 
+//Car slideshow code
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("carSlide");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  eval(slides[slideIndex].dataset.for + ".onclick()");
+}
 
 //End step by step form JS
 
@@ -291,6 +322,22 @@ function selectCar(car, card) {
 	
 	card.setAttribute("selected", "true");
 
+}
+
+function changeCarSelect(button) {
+	//Returns true when changed to cards
+	//Returns false when changed to slideshow
+	if (button.value == "Slideshow") {
+		CarCards.style.display = "none";
+		CarSlideshow.style.display = "block";
+		button.value = "Cards";
+		return true;
+	} else {
+		CarSlideshow.style.display = "none";
+		CarCards.style.display = "flex";
+		button.value = "Slideshow";
+		return false;
+	}
 }
 
 //Default set car to avoid errors
