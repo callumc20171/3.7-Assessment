@@ -32,6 +32,7 @@ input {
   margin: 12px;
   border-radius: 5px;
   border-color: #C6C4C4;
+  font-family: "Source Sans Pro", sans-serif, monospace;
 }
 
 input:invalid {
@@ -618,16 +619,41 @@ input[type=radio], input[type=checkbox]:checked::after {
 	.car {
 		width: 45%;
 	}
+
+	#StepForm {
+		width: 60%;
+	}
+
 	#LocationTitle {
 		margin-left: 20%;
 	}
 
 	#StepButtons {
-		float: none;
 	}
 }
 
 @media only screen and (max-width: 570px) {
+	.slideshow-container {
+		width: 100%;
+	}
+
+	.carSlideImage {
+		width: 100%;
+		height: inherit;
+	}
+
+	.numberText {
+		font-size: 18px;
+	}
+
+	.text {
+		font-size: 20px;
+	}
+
+	#StepForm {
+		width: 80%;
+	}
+
 	#CarChangeButton {
 		display: none;
 	}
@@ -646,5 +672,23 @@ input[type=radio], input[type=checkbox]:checked::after {
 
 	#FooterLogo {
 		display: none;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	#LocationTitle {
+		display: none;
+	}
+
+	#HeaderLogo {
+		width: 100%;
+	}
+
+	#CarInformation {
+		font-size: 16px;
+	}
+
+	#TermsLabel {
+		font-size: 8px;
 	}
 }
