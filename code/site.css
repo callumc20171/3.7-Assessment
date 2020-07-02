@@ -633,11 +633,11 @@ input[type=radio], input[type=checkbox]:checked::after {
 	}
 
 	#CarSlideshow {
-		display: block;
+		display: block !important;
 	}
 
 	#CarCards {
-		display: none;
+		display: none !important;
 	}
 
 	#LocationTitle {

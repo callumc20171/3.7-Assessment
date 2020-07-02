@@ -96,7 +96,6 @@ function fixStepIndicator(n) {
 //Car slideshow code
 
 var slideIndex = 1;
-showSlides(slideIndex);
 
 // Next/previous controls
 function plusSlides(n) {
@@ -108,7 +107,7 @@ function currentSlide(n) {
   showSlides(slideIndex = n);
 }
 
-function showSlides(n) {
+function showSlides(n, dontCall=false) {
   var i;
   var slides = document.getElementsByClassName("carSlide");
   var dots = document.getElementsByClassName("dot");
@@ -122,7 +121,11 @@ function showSlides(n) {
   }
   slides[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " active";
-  eval(slides[slideIndex].dataset.for + ".onclick()");
+  console.log(slideIndex, n);
+
+  console.log(n, dontCall);
+  //Terrible code dont do this
+  if (!dontCall) eval(slides[slideIndex-1].dataset.for + ".onclick()"); 
 }
 
 //End step by step form JS
@@ -301,9 +304,12 @@ function selectExtra(extraDiv) {
 function selectCar(car, card) {
 	//Selects and deselects the users picked car based
 	//Loads an animation while waiting for the database
+	let cars = []
+	for (let i of document.getElementsByClassName("car")) cars.push(i.id);
+	showSlides(slideIndex = cars.indexOf(card.id) +1, dontCall=true);
 	CarLoader.style.display = "grid";
 	CarDetailsDiv.style.display = "none";
-	//Retireve information from database
+	//Retrieve information from database
 	database.ref("cars/"+car).once("value", function(snapshot) {
 		CarInformation.innerHTML = snapshot.val().desc
 		CarPrice.innerHTML = snapshot.val().price + "$/day<br>(" + Number(
