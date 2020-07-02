@@ -124,8 +124,8 @@ function showSlides(n, dontCall=false) {
   console.log(slideIndex, n);
 
   console.log(n, dontCall);
-  //Terrible code dont do this
-  if (!dontCall) eval(slides[slideIndex-1].dataset.for + ".onclick()"); 
+  if (!dontCall) document.getElementById(
+  	slides[slideIndex-1].dataset.for).onclick();
 }
 
 //End step by step form JS
