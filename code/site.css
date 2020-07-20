@@ -692,4 +692,5 @@ input[type=radio], input[type=checkbox]:checked::after {
 	#TermsLabel {
 		font-size: 8px;
 	}
+
 }

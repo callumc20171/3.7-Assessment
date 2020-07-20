@@ -108,6 +108,7 @@ function currentSlide(n) {
 }
 
 function showSlides(n, dontCall=false) {
+  //Shows the given slide
   var i;
   var slides = document.getElementsByClassName("carSlide");
   var dots = document.getElementsByClassName("dot");
@@ -123,6 +124,7 @@ function showSlides(n, dontCall=false) {
   dots[slideIndex-1].className += " active";
   console.log(slideIndex, n);
 
+  //dontCall var used to prevent iteration of function
   console.log(n, dontCall);
   if (!dontCall) document.getElementById(
   	slides[slideIndex-1].dataset.for).onclick();
@@ -277,7 +279,8 @@ function pushToFirebase(ticket) {
 }
 
 function generateTicket(ticket) {
-	//Recursivvely generates a ticket that is not in use.
+	//Recursively generates a ticket that is not in use.
+	//Prevents overwriting an existing order
 	let ticketRef = database.ref("Bookings/" + ticket);
 	ticketRef.once('value', function(snapshot) { //Recursively generate unused ticket
 	if (!snapshot.exists()) {
@@ -292,6 +295,7 @@ function generateTicket(ticket) {
 //Car select JS
 
 function selectExtra(extraDiv) {
+	//Simple function to add attribute to the extras
 	if (extraDiv.getAttribute("selected")) {
 		extraDiv.removeAttribute("selected");
 	} else {
@@ -309,6 +313,14 @@ function selectCar(car, card) {
 	showSlides(slideIndex = cars.indexOf(card.id) +1, dontCall=true);
 	CarLoader.style.display = "grid";
 	CarDetailsDiv.style.display = "none";
+	//Set timeout for firebase request
+	setTimeout(function() {
+		if (CarDetailsDiv.style.display == "none") {
+			CarInformation.innerHTML = "Error loading information from firebase...";
+			CarDetailsDiv.style.display = "grid";
+			CarLoader.style.display = "none";
+		}
+	}, 20000);
 	//Retrieve information from database
 	database.ref("cars/"+car).once("value", function(snapshot) {
 		CarInformation.innerHTML = snapshot.val().desc
