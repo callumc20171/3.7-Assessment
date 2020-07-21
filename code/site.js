@@ -289,22 +289,22 @@ function pushToFirebase(ticket) {
 	}
 
 	if (!(RegExp(NameInput.pattern).test(bookingInfo.name))) {
-		calllError();
+		callError();
 		return;
 	}
 
 	if (!(RegExp(EmailInput.pattern).test(bookingInfo.email))) {
-		calllError();
+		callError();
 		return;
 	}
 
 	if (!(RegExp(CellInput.pattern).test(bookingInfo.phone))) {
-		calllError();
+		callError();
 		return;
 	}
 
 	if (!(RegExp(DLNumber.pattern).test(bookingInfo.licenseNumber))) {
-		calllError();
+		callError();
 		return;
 	}
 
