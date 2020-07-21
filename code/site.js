@@ -4,6 +4,9 @@ const DAYS_ADD = 0; //Add days to JS Date
 const DAYS_SUBTRACT = 1; //Subtract days from JS Date
 const CHECK_PICKUP = 0; //Checks the pickup value
 const CHECK_RETURN = 1; //Checks the return value
+//Constant prices
+const BOOKING_FEE = 50;
+const INSURANCE_FEE = 20;
 
 database = firebase.database() //Set up firebase
 
@@ -11,6 +14,15 @@ database = firebase.database() //Set up firebase
 
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
+
+function callError() {
+	ErrorDiv.style.display = "block";
+	StepForm.style.marginTop = "12px";
+	setTimeout(function () {
+		ErrorDiv.style.display = "none";
+		StepForm.style.marginTop = "4%";
+	}, 3000);
+}
 
 function showTab(n) {
 	// This function will display the specified tab of the form ...
@@ -57,28 +69,27 @@ function validateForm() {
 	y = x[currentTab].getElementsByTagName("input");
 	// A loop that checks every input field in the current tab:
 	for (i = 0; i < y.length; i++) {
-	// If a field is empty...
-	if (y[i].value == "") {
-	  // add an "invalid" class to the field:
-	  y[i].className += " invalid";
-	  // and set the current valid status to false:
-	  valid = false;
-	}
+		// If a field is empty...
+		if (y[i].value == "") {
+		  // add an "invalid" class to the field:
+		  y[i].className += " invalid";
+		  // and set the current valid status to false:
+		  valid = false;
+		}
 
-	if (!y[i].validity.valid) {
-	  valid = false;
-	}
+		if (!y[i].validity.valid) {
+		  valid = false;
+		}
+
+		if (!valid) {
+			y[i].focus();
+		}
 	}
 	// If the valid status is true, mark the step as finished and valid:
 	if (valid) {
 		document.getElementsByClassName("step")[currentTab].className += " finish";
 	} else {
-		ErrorDiv.style.display = "block";
-		StepForm.style.marginTop = "12px";
-		setTimeout(function () {
-			ErrorDiv.style.display = "none";
-			StepForm.style.marginTop = "4%";
-		}, 3000);
+		callError();
 	}
 	return valid; // return the valid status
 }
@@ -122,10 +133,8 @@ function showSlides(n, dontCall=false) {
   }
   slides[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " active";
-  console.log(slideIndex, n);
 
   //dontCall var used to prevent iteration of function
-  console.log(n, dontCall);
   if (!dontCall) document.getElementById(
   	slides[slideIndex-1].dataset.for).onclick();
 }
@@ -213,9 +222,8 @@ function calculateExtrasCost(extras) {
 
 function calculateCost(carPrice, days) {
 	//Adds the consts booking fee and insurance fee to the total cost
-	let bookingFee = 50;
-	let insuranceFee = 20;
-	return Number(Number(carPrice) * days) + bookingFee + insuranceFee; //Total coast of everything added
+	return Number(
+	Number(carPrice) * days) + BOOKING_FEE + (INSURANCE_FEE * Number(days)); //Total coast of everything added
 }
 
 function updateBooking() {
@@ -239,11 +247,15 @@ function updateBooking() {
 	var rentalDays = RentalDays.value;
 	var returnDate = ReturnDateInput.value;
 	var cost = calculateCost(selectedCar.price, rentalDays);
+	if (extrasPrice != null) {
+		cost += extrasPrice;
+	}
 	var extraComments = ExtraDetail.value;
 	//Label update
 	PickUpLabel.innerHTML = "Pick up date: " + pickUpDate;
 	ReturnLabel.innerHTML = "Return date: " + returnDate;
 	SelectedCar.innerHTML = "Car: " + selectedCar.car;
+	InsuranceFee.innerHTML = "Insurance fee (20$/day): " + INSURANCE_FEE * rentalDays + "$";
 	Price.innerHTML = "Final price: " + cost + "$";
 	//Returns JSON of booking info
 	return {
@@ -268,6 +280,33 @@ function pushToFirebase(ticket) {
 	bookingInfo.phone = CellInput.value;
 	bookingInfo.licenseNumber = DLNumber.value;
 	bookingInfo.age = AgeInput.value;
+
+	//Check all information is valid
+	if (Number(bookingInfo.age) < 25
+	 || Number(bookingInfo.age) > 130) {
+		callError();
+		return;
+	}
+
+	if (!(RegExp(NameInput.pattern).test(bookingInfo.name))) {
+		calllError();
+		return;
+	}
+
+	if (!(RegExp(EmailInput.pattern).test(bookingInfo.email))) {
+		calllError();
+		return;
+	}
+
+	if (!(RegExp(CellInput.pattern).test(bookingInfo.phone))) {
+		calllError();
+		return;
+	}
+
+	if (!(RegExp(DLNumber.pattern).test(bookingInfo.licenseNumber))) {
+		calllError();
+		return;
+	}
 
 
     database.ref("bookings/" + ticket).set(bookingInfo);
