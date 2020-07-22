@@ -15,11 +15,17 @@ database = firebase.database() //Set up firebase
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
-function callError() {
+//Show the error banner when form is not filled correctly
+//Default error message
+function callError(
+	errorMessage="Please fill in the form correctly.") {
 	ErrorDiv.style.display = "block";
+	ErrorTitle.innerHTML = errorMessage;
 	StepForm.style.marginTop = "12px";
 	setTimeout(function () {
 		ErrorDiv.style.display = "none";
+		//Set default message
+		ErrorTitle.innerHTML = "Please fill in the form correctly.";
 		StepForm.style.marginTop = "4%";
 	}, 3000);
 }
@@ -65,31 +71,51 @@ function nextPrev(n) {
 function validateForm() {
 	// This function deals with validation of the form fields
 	var x, y, i, valid = true;
+	var invalidInput;
+	var currentEleValid;
 	x = document.getElementsByClassName("tab");
 	y = x[currentTab].getElementsByTagName("input");
 	// A loop that checks every input field in the current tab:
 	for (i = 0; i < y.length; i++) {
+		currentEleValid = true;
 		// If a field is empty...
 		if (y[i].value == "") {
 		  // add an "invalid" class to the field:
 		  y[i].className += " invalid";
 		  // and set the current valid status to false:
 		  valid = false;
+		  currentEleValid = false;
 		}
 
 		if (!y[i].validity.valid) {
 		  valid = false;
+		  currentEleValid = false;
 		}
 
-		if (!valid) {
+		if (!currentEleValid) {			
 			y[i].focus();
+		    invalidInput = y[i].type;
 		}
 	}
 	// If the valid status is true, mark the step as finished and valid:
 	if (valid) {
 		document.getElementsByClassName("step")[currentTab].className += " finish";
 	} else {
-		callError();
+		switch (invalidInput) {
+			case "date":
+				callError("Please select a valid date.");
+				break;
+			case "number":
+				callError(
+					"Please select a valid age. Note: you must be atleast 25");
+				break;
+			case "checkbox":
+				callError("Please agree to the terms and conditions");
+				break;
+			default:
+				callError();
+				break;
+		}
 	}
 	return valid; // return the valid status
 }
@@ -164,7 +190,6 @@ function dateChecker(flag) {
 			return true;
 		} return false;
 	} else { //If invalid flag
-		console.log("Unknown flag in dateChecker: " + flag);
 		return false;
 	}
   
@@ -207,6 +232,10 @@ RentalDays.addEventListener("change", function() {
 	dateChecker(CHECK_PICKUP);
 });
 
+//Set default date to today
+PickUpDateInput.value = stringifyDate(new Date());
+dateChecker(CHECK_PICKUP);
+
 //Booking information updater
 
 function calculateExtrasCost(extras) {
@@ -228,7 +257,12 @@ function calculateCost(carPrice, days) {
 
 function updateBooking() {
 	//Updates the booking summary tab using the users information
-	var selectedCar = document.querySelector(".car[selected]").dataset;
+	let carEle = document.querySelector(".car[selected]");
+
+	//Update price on page
+	carEle.onclick();
+	var selectedCar = carEle.dataset;
+
 	var extras = document.querySelectorAll(".extrasCard[selected]");
 	Extras.innerHTML = "Extras: "
 	var extrasArray = []; //Updates the extras and adds them to an array
