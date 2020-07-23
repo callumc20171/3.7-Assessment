@@ -295,6 +295,7 @@ function updateBooking() {
 	return {
 		"PickUp" : pickUpDate,
 		"Return" : returnDate,
+		"Car" : selectedCar.car,
 		"RentedDays" : rentalDays,
 		"cost" : cost,
 		"extras" : extrasArray,
