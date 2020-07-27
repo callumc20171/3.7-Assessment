@@ -130,7 +130,7 @@ input[type=radio], input[type=checkbox]:checked::after {
 }
 
 .title {
-	font-family: "Oxygen" sans-serif, monospace;
+	font-family: "Oxygen", sans-serif, monospace;
 	font-size: 32px;
 	color: #0A4F70;
 }
