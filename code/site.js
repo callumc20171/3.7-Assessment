@@ -350,6 +350,9 @@ function pushToFirebase(ticket) {
     PageContainer.style.display = "none";
 
     ConfirmOverlay.style.display = "block";
+    setTimeout(function() {
+        location.reload();
+    }, 10000);
 }
 
 function generateTicket(ticket) {

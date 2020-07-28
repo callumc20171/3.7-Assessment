@@ -676,7 +676,7 @@ input[type=radio], input[type=checkbox]:checked::after {
 	}
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 450px) {
 	#LocationTitle {
 		display: none;
 	}
