@@ -27,6 +27,7 @@
 				</div>
 				<div class="section" id="StepForm">
 					<div class="tab">
+						<!--Selecting pick up and return date-->
 						<h2 class="title">Pick up information:</h2><br>
 						<label>Pick up date:</label><input type="date" id="PickUpDateInput"><br>
 						<label>Days:</label>
@@ -50,10 +51,11 @@
 					</div>
 
 					<div class="tab">
+						<!--Select the car using a slideshow or cards-->
 						<h2 class="title">Select Car:
 						<input type="button" id="CarChangeButton" value="Slideshow" onclick="changeCarSelect(this);"></h2><br>
 						<div id="CarSelectDiv">
-							<div id="CarSlideshow">
+							<div id="CarSlideshow"> <!--Slideshow code-->
 								<div class="slideshow-container">
 								  <div class="carSlide fade" data-for="ToyotaEstima">
 								    <div class="numbertext">1 / 8</div>
@@ -118,7 +120,7 @@
 								  <span class="dot" onclick="currentSlide(8)"></span>
 								</div>
 							</div>
-							<div id="CarCards">
+							<div id="CarCards"><!--Cards to select the car-->
 								<div id="ToyotaEstima" class="car card" onclick='selectCar("toyota estima", this);' data-price="62" data-car="Toyota Estima">
 								  <img alt="Toyota Estima" class="carImage" src="../images/edited/toyota_estima_edited.png">
 								  <div class="container">
@@ -190,6 +192,7 @@
 					</div>
 
 					<div class="tab">
+						<!--Extras select tab using cards-->
 						<h2 class="title">Available Extras:</h2><br>
 						<div id="ExtrasCards">
 							<div class="extrasCard card" onclick="selectExtra(this);" data-name="Snow Chains" data-price="60">
@@ -249,6 +252,7 @@
 
 					<div class="tab">
 						<h2 class="title">Personal Details:</h2><br>
+						<!--Personal information inputs-->
 						<div id="DetailsGrid">
 							<label id="NameLabel">Full Name: </label><input type="text" class="detailInput" id="NameInput" placeholder="Your name" pattern="^(\w\w+)\s(\w+)$" autocomplete="name"><br>
 							<label id="EmailLabel">Email: </label><input type="email" class="detailInput" id="EmailInput" placeholder="your@email.com" autocomplete="email"><br>
@@ -295,7 +299,7 @@
 				</div>
 			</footer>
 		</div>
-
+		<!--Firebase scripts and JS code-->
 		<script src="https://www.gstatic.com/firebasejs/7.15.3/firebase.js"></script>
 
 		<script>
