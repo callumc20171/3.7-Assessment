@@ -289,8 +289,8 @@ function updateBooking() {
     PickUpLabel.innerHTML = "Pick up date: " + pickUpDate;
     ReturnLabel.innerHTML = "Return date: " + returnDate;
     SelectedCar.innerHTML = "Car: " + selectedCar.car;
-    InsuranceFee.innerHTML = "Insurance fee (20$/day): " + INSURANCE_FEE * rentalDays + "$";
-    Price.innerHTML = "Final price: " + cost + "$";
+    InsuranceFee.innerHTML = "Insurance fee ($20/day): $" + INSURANCE_FEE * rentalDays;
+    Price.innerHTML = "Final price: $" + cost;
     //Returns JSON of booking info
     return {
         "PickUp" : pickUpDate,
@@ -401,8 +401,8 @@ function selectCar(car, card) {
     //Retrieve information from database
     database.ref("cars/"+car).once("value", function(snapshot) {
         CarInformation.innerHTML = snapshot.val().desc
-        CarPrice.innerHTML = snapshot.val().price + "$/day<br>(" + Number(
-            snapshot.val().price) * Number(RentalDays.value) + "$ total)";
+        CarPrice.innerHTML = "$" + snapshot.val().price + "/day<br>($" + Number(
+            snapshot.val().price) * Number(RentalDays.value) + " total)";
         CarDetailsDiv.style.display = "grid";
         CarLoader.style.display = "none";
     });
